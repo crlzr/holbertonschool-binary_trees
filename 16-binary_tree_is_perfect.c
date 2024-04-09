@@ -3,20 +3,37 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-size_t binary_tree_depth(const binary_tree_t *tree)
-{
-	size_t depth = 0;
+/**
+ * binary_tree_height - measures the height of a binary tree
+ * @tree: pointer to root node
+ * Return: if tree is NULL, return 0
+ */
 
-	if (tree == NULL || (tree->parent == NULL))
+size_t binary_tree_height(const binary_tree_t *tree)
+{
+	size_t left;
+	size_t right;
+
+	if (tree == NULL || (tree->left == NULL && tree->right == NULL))
 	{
 		return (0);
 	}
+	else
+	{
+	left = binary_tree_height(tree->left);
 
-	depth = binary_tree_depth(tree->parent);
+	right = binary_tree_height(tree->right);
+	}
 
-	return (depth + 1);
+	if (left > right)
+	{
+		return (left + 1);
+	}
+	else
+	{
+		return (right + 1);
+	}
 }
-
 /**
  * binary_tree_is_perfect - checks if a bt is perfect
  * @tree: pointer to root node
@@ -30,17 +47,17 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	{
 		return (0);
 	}
-	
+
 	/* check if node is leaf)*/
 	if (tree->left == NULL && tree->right == NULL)
 	{
 		return (1);
 	}
-
-	if (binary_tree_depth(tree->left) != 
-	(binary_tree_depth(tree->right)))
+	/* check if they are on the same depth */
+	if (binary_tree_height(tree->left) !=
+	(binary_tree_height(tree->right)))
 	{
-		
+
 		return (0);
 	}
 	else
