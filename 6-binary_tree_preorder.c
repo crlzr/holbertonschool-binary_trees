@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 /**
- * binary_tree_preorder: traverse tree with pre-order traversal
+ * binary_tree_preorder - traverse tree with pre-order traversal
  * @tree: pointer to root node
  * @func: function pointer to call for each node
  * Return: void
